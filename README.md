@@ -1,35 +1,34 @@
-# Web Educativa Angular
+NG-angular
 
-Sitio educativo que explica qué es Angular, para qué sirve y cuáles son sus principales características mediante tarjetas informativas y una trivia interactiva con puntaje inmediato.
+NG-angular es un proyecto educativo desarrollado con el objetivo de ofrecer una introducción clara, estructurada y moderna al framework Angular.
+El sitio presenta contenido teórico, ejemplos simples y una trivia interactiva que permite consolidar los conocimientos adquiridos sobre la plataforma.
 
-## Contenido principal
+Descripción General
 
-- **Introducción:** definición del framework, casos de uso y pilares de su arquitectura standalone.
-- **Características:** tarjetas con ventajas comparativas orientadas a justificar Angular en proyectos reales.
-- **Trivia:** 5 preguntas con retroalimentación inmediata, contador de respuestas y botón para reiniciar.
-- **Diseño:** layout coherente (navbar fijo, hero, tarjetas y footer) con tipografía Space Grotesk y paleta azul/ámbar.
+Este proyecto fue realizado como parte de un trabajo final, con el propósito de aplicar conocimientos de desarrollo web y diseño de interfaces.
+La plataforma proporciona una experiencia educativa completa, combinando contenido conceptual, recursos visuales y actividades interactivas orientadas a principiantes que deseen familiarizarse con Angular.
 
-## Scripts disponibles
+Objetivos del Proyecto
 
-```bash
-npm install        # Instala dependencias
-npm start          # Servidor de desarrollo en http://localhost:4200/
-npm run build      # Compilación de producción en dist/web-educativa-angular
-npm test           # Ejecuta las pruebas unitarias (Karma + Jasmine)
-```
+- Presentar una introducción accesible y bien organizada sobre Angular.
+- Explicar para qué sirve, cómo funciona y cuáles son sus características principales.
+- Ofrecer una experiencia interactiva mediante una trivia evaluativa.
+- Aplicar buenas prácticas de diseño visual, estructura y funcionalidad.
 
-## Despliegue sugerido
+Características Principales
 
-1. Ejecuta `npm run build` para generar la carpeta `dist/web-educativa-angular`.
-2. Publica el contenido de `dist/web-educativa-angular/browser` en GitHub Pages, Firebase Hosting o Vercel.
-3. Actualiza los enlaces públicos en el footer y aquí abajo:
-   - Repositorio: `https://github.com/tu-usuario/web-educativa-angular`
-   - Sitio publicado: `https://tu-dominio-o-github-pages`
+- Sección informativa sobre Angular: historia, propósito y fundamentos.
+- Listado de características y ventajas del framework.
+- Trivia interactiva con retroalimentación inmediata (correcto/incorrecto).
+- Diseño visual coherente, incluyendo paleta de colores, tipografías y estructura adaptada al usuario.
+- Sitio publicado en línea y accesible desde cualquier dispositivo.
 
-## Checklist de entrega
+Tecnologías Utilizadas
 
-- [ ] Subir código a un repositorio público y completar el README con los enlaces reales.
-- [ ] Publicar el sitio y registrar la URL en el Excel provisto.
-- [ ] Confirmar que la trivia muestre resultados correctos/incorrectos y que el puntaje se reinicie correctamente.
-
-¡Listo para compartir y demostrar tus conocimientos de Angular! 😊
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Git
+- GitHub
+- Vercel
