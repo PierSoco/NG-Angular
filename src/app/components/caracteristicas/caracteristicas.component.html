@@ -1,0 +1,28 @@
+<section class="view caracteristicas">
+  <header>
+    <p class="eyebrow">Características</p>
+    <h1>{{ titulo }}</h1>
+    <p>
+      Cada tarjeta resume un concepto y explica el beneficio tangible que puedes mencionar al presentar tu proyecto.
+    </p>
+  </header>
+
+  <div class="feature-grid">
+    <article class="feature-card" *ngFor="let feature of listaCaracteristicas">
+      <div class="glow"></div>
+      <h3>{{ feature.nombre }}</h3>
+      <p>{{ feature.detalle }}</p>
+      <span class="badge">{{ feature.beneficio }}</span>
+    </article>
+  </div>
+
+  <section class="categories">
+    <article *ngFor="let categoria of categorias">
+      <h3>{{ categoria.titulo }}</h3>
+      <p>{{ categoria.descripcion }}</p>
+      <div class="chips">
+        <span *ngFor="let chip of categoria.chips">{{ chip }}</span>
+      </div>
+    </article>
+  </section>
+</section>

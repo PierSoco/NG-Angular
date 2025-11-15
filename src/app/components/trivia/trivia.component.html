@@ -1,0 +1,81 @@
+<section class="view trivia-view">
+  <header class="trivia-hero">
+    <div>
+      <p class="eyebrow">Trivia interactiva</p>
+      <h1>¿Cuánto sabes de Angular?</h1>
+      <p>
+        Responde pregunta por pregunta. Cada selección se bloquea para mantener la tensión y al final verás un
+        resumen con tus aciertos, errores y explicación de cada punto.
+      </p>
+    </div>
+    <div class="score-card">
+      <p>Progreso</p>
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="progreso"></div>
+      </div>
+      <span>{{ indiceActual + (respuestaActual !== undefined ? 1 : 0) }} / {{ preguntas.length }}</span>
+      <p>Puntaje actual: <strong>{{ puntaje }}</strong></p>
+    </div>
+  </header>
+
+  <section class="pregunta-activa" *ngIf="!mostrarResultado">
+    <div class="etiqueta">Pregunta {{ indiceActual + 1 }}</div>
+    <h2>{{ preguntaActual.texto }}</h2>
+    <div class="opciones">
+      <button
+        type="button"
+        *ngFor="let opcion of preguntaActual.opciones; let i = index"
+        [disabled]="respuestaActual !== undefined"
+        (click)="seleccionarRespuesta(i)"
+        [class.correcta]="respuestaActual === i && i === preguntaActual.correcta"
+        [class.incorrecta]="respuestaActual === i && i !== preguntaActual.correcta"
+      >
+        {{ opcion }}
+      </button>
+    </div>
+
+    <div class="acciones">
+      <button
+        class="btn primary"
+        type="button"
+        [disabled]="respuestaActual === undefined"
+        (click)="avanzar()"
+      >
+        {{ indiceActual === preguntas.length - 1 ? 'Ver resultados' : 'Siguiente pregunta' }}
+      </button>
+      <p class="tip">Una vez respondida, la pregunta se bloquea para mantener el reto.</p>
+    </div>
+  </section>
+
+  <section class="resultado" *ngIf="mostrarResultado">
+    <div class="resumen-header">
+      <h2>Obtuviste {{ puntaje }} de {{ preguntas.length }} respuestas correctas</h2>
+      <button class="btn secondary" type="button" (click)="reiniciarTrivia()">Intentar nuevamente</button>
+    </div>
+
+    <div class="resumen-grid">
+      <article
+        *ngFor="let pregunta of preguntas; let idx = index"
+        [class.correct]="respuestaEsCorrecta(pregunta, respuestasSeleccionadas[idx])"
+      >
+        <div class="resumen-top">
+          <span class="badge">Pregunta {{ idx + 1 }}</span>
+          <span class="estado">
+            {{
+              respuestaEsCorrecta(pregunta, respuestasSeleccionadas[idx])
+                ? 'Correcta'
+                : 'Incorrecta'
+            }}
+          </span>
+        </div>
+        <h3>{{ pregunta.texto }}</h3>
+        <p>
+          Tu respuesta:
+          <strong>{{ pregunta.opciones[respuestasSeleccionadas[idx]] || 'No respondida' }}</strong>
+        </p>
+        <p>Respuesta correcta: <strong>{{ pregunta.opciones[pregunta.correcta] }}</strong></p>
+        <p class="detalle">{{ pregunta.detalle }}</p>
+      </article>
+    </div>
+  </section>
+</section>
