@@ -1,80 +1,145 @@
 <section class="view trivia-view">
   <header class="trivia-hero">
-    <div>
-      <p class="eyebrow">Trivia interactiva</p>
-      <h1>¿Cuánto sabes de Angular?</h1>
+    <div class="hero-copy">
+      <p class="eyebrow">Reto Angular</p>
+      <div class="title-row">
+        <h1>Modo desafio interactivo</h1>
+        <span class="pill">Ronda {{ rondaActual }}</span>
+      </div>
       <p>
-        Responde pregunta por pregunta. Cada selección se bloquea para mantener la tensión y al final verás un
-        resumen con tus aciertos, errores y explicación de cada punto.
+        Alterna entre mitos/realidades y decisiones tacticas. Cuida tu energia, acumula multiplicadores por racha
+        y usa pistas con moderacion para llegar al final de la galaxia Angular.
       </p>
+      <div class="live-hint">
+        <span class="pulse"></span>
+        <span>5 retos por ronda - Pistas opcionales - Energia compartida en toda la partida</span>
+      </div>
     </div>
     <div class="score-card">
-      <p>Progreso</p>
+      <div class="score-head">
+        <p class="eyebrow">Progreso</p>
+        <span class="mini-label">Reto {{ indiceActual + (respuestaActual !== undefined ? 1 : 0) }} / {{ tamanoRonda }}</span>
+      </div>
       <div class="progress">
         <div class="progress-bar" [style.width.%]="progreso"></div>
       </div>
-      <span>{{ indiceActual + (respuestaActual !== undefined ? 1 : 0) }} / {{ preguntas.length }}</span>
-      <p>Puntaje actual: <strong>{{ puntaje }}</strong></p>
+      <div class="score-meta">
+        <div>
+          <small>Puntaje</small>
+          <strong>{{ puntaje }}</strong>
+        </div>
+        <div>
+          <small>Racha</small>
+          <strong>{{ rachaMaxima }}</strong>
+        </div>
+        <div>
+          <small>Multiplicador</small>
+          <strong>x{{ multiplicador }}</strong>
+        </div>
+      </div>
+      <div class="energia">
+        <span class="label">Energia</span>
+        <div class="hearts">
+          <span *ngFor="let heart of [].constructor(energiaMax); let i = index" [class.off]="i + 1 > energia">&hearts;</span>
+        </div>
+      </div>
+      <button class="btn ghost" type="button" (click)="reiniciarTrivia()">Reiniciar partida</button>
     </div>
   </header>
 
   <section class="pregunta-activa" *ngIf="!mostrarResultado">
-    <div class="etiqueta">Pregunta {{ indiceActual + 1 }}</div>
-    <h2>{{ preguntaActual.texto }}</h2>
-    <div class="opciones">
+    <div class="etiqueta">Reto {{ indiceActual + 1 }} / {{ tamanoRonda }}</div>
+    <h2>{{ retoActual.titulo }}</h2>
+    <p class="subtitle">{{ retoActual.escenario }}</p>
+
+    <div class="tipo">
+      <span class="badge" [class.mito]="retoActual.tipo === 'mito'">{{ retoActual.tipo === 'mito' ? 'Mito / Realidad' : 'Decision multiple' }}</span>
+      <button class="btn secondary" type="button" (click)="mostrarPista()" [disabled]="pistaActiva">Ver pista</button>
+    </div>
+
+    <p class="pista" *ngIf="pistaActiva">{{ retoActual.pista }}</p>
+
+    <div class="opciones mito" *ngIf="retoActual.tipo === 'mito'">
+      <button type="button" [disabled]="respuestaActual !== undefined" (click)="responderMito(false)">Mito</button>
+      <button type="button" [disabled]="respuestaActual !== undefined" (click)="responderMito(true)">Realidad</button>
+    </div>
+
+    <div class="opciones" *ngIf="retoActual.tipo === 'multiple'">
       <button
         type="button"
-        *ngFor="let opcion of preguntaActual.opciones; let i = index"
+        *ngFor="let opcion of retoActual.opciones; let i = index"
         [disabled]="respuestaActual !== undefined"
-        (click)="seleccionarRespuesta(i)"
-        [class.correcta]="respuestaActual === i && i === preguntaActual.correcta"
-        [class.incorrecta]="respuestaActual === i && i !== preguntaActual.correcta"
+        (click)="responderMultiple(i)"
+        [class.correcta]="respuestaActual === i && i === retoActual.respuestaIndice"
+        [class.incorrecta]="respuestaActual === i && i !== retoActual.respuestaIndice"
       >
-        {{ opcion }}
+        <span class="option-label">{{ opcion }}</span>
       </button>
     </div>
 
     <div class="acciones">
-      <button
-        class="btn primary"
-        type="button"
-        [disabled]="respuestaActual === undefined"
-        (click)="avanzar()"
-      >
-        {{ indiceActual === preguntas.length - 1 ? 'Ver resultados' : 'Siguiente pregunta' }}
+      <button class="btn primary" type="button" [disabled]="respuestaActual === undefined" (click)="avanzar()">
+        {{ indiceActual === tamanoRonda - 1 || energia === 0 ? 'Ver resultados' : 'Siguiente reto' }}
       </button>
-      <p class="tip">Una vez respondida, la pregunta se bloquea para mantener el reto.</p>
+      <p class="tip">Fallas reducen energia. Rachas aumentan el multiplicador hasta x5.</p>
     </div>
   </section>
 
   <section class="resultado" *ngIf="mostrarResultado">
     <div class="resumen-header">
-      <h2>Obtuviste {{ puntaje }} de {{ preguntas.length }} respuestas correctas</h2>
-      <button class="btn secondary" type="button" (click)="reiniciarTrivia()">Intentar nuevamente</button>
+      <div>
+        <p class="eyebrow">Ronda {{ rondaActual }}</p>
+        <h2>Lograste {{ estadisticas.aciertos }} puntos</h2>
+        <p class="subtitle">
+          Precision {{ estadisticas.precision }}% · Mejor racha {{ estadisticas.rachaMaxima }} · Energia restante {{ estadisticas.energiaRestante }}/{{ energiaMax }}
+        </p>
+      </div>
+      <div class="result-actions">
+        <button class="btn primary" type="button" (click)="siguienteRonda()">Siguiente ronda</button>
+        <button class="btn secondary" type="button" (click)="reiniciarTrivia()">Repetir con nuevos retos</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <article class="stat-card">
+        <p class="label">Precision</p>
+        <h3>{{ estadisticas.precision }}%</h3>
+        <p class="muted">Porcentaje de aciertos en esta ronda.</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">Racha maxima</p>
+        <h3>{{ estadisticas.rachaMaxima }}</h3>
+        <p class="muted">Mayor numero de respuestas correctas consecutivas.</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">Energia final</p>
+        <h3>{{ estadisticas.energiaRestante }} / {{ energiaMax }}</h3>
+        <p class="muted">Corazones que te quedaron al cerrar la ronda.</p>
+      </article>
     </div>
 
     <div class="resumen-grid">
       <article
-        *ngFor="let pregunta of preguntas; let idx = index"
-        [class.correct]="respuestaEsCorrecta(pregunta, respuestasSeleccionadas[idx])"
+        *ngFor="let reto of retos; let idx = index"
+        [class.correct]="respuestaEsCorrecta(reto, respuestasSeleccionadas[idx])"
       >
         <div class="resumen-top">
-          <span class="badge">Pregunta {{ idx + 1 }}</span>
+          <span class="badge">Reto {{ idx + 1 }}</span>
           <span class="estado">
-            {{
-              respuestaEsCorrecta(pregunta, respuestasSeleccionadas[idx])
-                ? 'Correcta'
-                : 'Incorrecta'
-            }}
+            {{ respuestaEsCorrecta(reto, respuestasSeleccionadas[idx]) ? 'Correcto' : 'Incorrecto' }}
           </span>
         </div>
-        <h3>{{ pregunta.texto }}</h3>
-        <p>
+        <h3>{{ reto.titulo }}</h3>
+        <p class="muted">{{ reto.escenario }}</p>
+        <p class="muted">
           Tu respuesta:
-          <strong>{{ pregunta.opciones[respuestasSeleccionadas[idx]] || 'No respondida' }}</strong>
+          <strong>{{ respuestaUsuarioTexto(reto, respuestasSeleccionadas[idx]) }}</strong>
         </p>
-        <p>Respuesta correcta: <strong>{{ pregunta.opciones[pregunta.correcta] }}</strong></p>
-        <p class="detalle">{{ pregunta.detalle }}</p>
+        <p class="muted">
+          Respuesta correcta:
+          <strong>{{ respuestaCorrectaTexto(reto) }}</strong>
+        </p>
+        <p class="detalle">{{ reto.detalle }}</p>
       </article>
     </div>
   </section>

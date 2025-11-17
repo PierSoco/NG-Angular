@@ -27,29 +27,29 @@ interface TimelineItem {
   styleUrls: ['./introduccion.component.css']
 })
 export class IntroduccionComponent {
-  titulo = '¿Qué es Angular y por qué se adapta tan bien a proyectos educativos y empresariales?';
+  titulo = 'Por que Angular es un aliado para crear productos modernos y educativos';
   descripcion =
-    'Angular es un framework open-source mantenido por Google que combina TypeScript, herramientas oficiales y una arquitectura basada en componentes standalone para crear experiencias web fluidas y escalables.';
+    'Angular combina TypeScript, APIs standalone y tooling oficial para construir experiencias confiables, accesibles y listas para escalar desde un MVP hasta un campus digital o una suite empresarial.';
 
   stats: Stat[] = [
-    { label: 'Versión estable', value: '17+', detail: 'Actualizaciones semestrales vía ng update.' },
+    { label: 'Version estable', value: '17+', detail: 'Actualizaciones guiadas via ng update.' },
     { label: 'Arquitectura', value: 'Standalone', detail: 'Component-first con lazy routes y signals.' },
-    { label: 'Comunidad', value: '+1M devs', detail: 'Documentación y recursos creados por la comunidad.' },
-    { label: 'Rendimiento', value: '40%+', detail: 'Mejoras de Lighthouse combinando SSR + hydration.' }
+    { label: 'Comunidad', value: '+1M devs', detail: 'Recetas, librerias y soporte activo.' },
+    { label: 'Rendimiento', value: '40%+', detail: 'Mejora al combinar SSR, hydration y bundle splitting.' }
   ];
 
   usos: DatoAngular[] = [
     {
       titulo: 'Aplicaciones educativas',
-      detalle: 'Paneles, aulas virtuales y experiencias interactivas que requieren SPA rápidas.'
+      detalle: 'Aulas virtuales, paneles docentes y laboratorios interactivos listos para escalar.'
     },
     {
       titulo: 'Dashboards empresariales',
-      detalle: 'Componentes reutilizables para monitorear métricas, flujos y reportes.'
+      detalle: 'Componentes reutilizables para monitorear metricas, flujos y reportes en tiempo real.'
     },
     {
       titulo: 'Integraciones API',
-      detalle: 'Servicios y HTTP interceptors listos para consumir REST y GraphQL.'
+      detalle: 'Servicios e interceptors listos para REST, GraphQL y autenticacion.'
     }
   ];
 
@@ -64,7 +64,7 @@ export class IntroduccionComponent {
     },
     {
       titulo: 'Accesibilidad',
-      detalle: 'Herramientas para internacionalización, ARIA y buenas prácticas UX.'
+      detalle: 'Herramientas para internacionalizacion, ARIA y buenas practicas UX.'
     }
   ];
 
@@ -77,12 +77,12 @@ export class IntroduccionComponent {
     {
       year: '2020',
       title: 'Ivy y rendimiento',
-      description: 'Nuevo motor de renderizado que habilita compilaciones más ligeras.'
+      description: 'Nuevo motor de renderizado que habilita compilaciones mas ligeras.'
     },
     {
       year: '2023',
       title: 'Standalone APIs',
-      description: 'Adiós NgModules obligatorios, hola componentes autocontenidos.'
+      description: 'Adios NgModules obligatorios, hola componentes autocontenidos.'
     },
     {
       year: '2024',

@@ -1,10 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --color-primary: #1c658c;
-  --color-secondary: #ffd369;
-  --color-dark: #0f172a;
-  --color-muted: #475569;
+  color-scheme: light;
+  --page-bg: radial-gradient(circle at 20% 20%, #fdfdfd 0%, #e9edff 25%, #f4f4ff 55%, #e1e5ff 75%, #f8faff 100%);
+  --surface-1: rgba(255, 255, 255, 0.82);
+  --surface-2: rgba(255, 255, 255, 0.65);
+  --surface-border: rgba(77, 91, 124, 0.12);
+  --text-primary: #0f172a;
+  --text-muted: #475569;
+  --accent: #7c3aed;
+  --accent-2: #22d3ee;
+  --glow: rgba(124, 58, 237, 0.35);
+  --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.18);
+  --nav-bg: linear-gradient(120deg, rgba(5, 8, 23, 0.75), rgba(24, 32, 64, 0.65));
+  --nav-border: rgba(15, 23, 42, 0.22);
+  --nav-text: #f8fafc;
+  --nav-glow: rgba(124, 58, 237, 0.35);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page-bg: radial-gradient(circle at 15% 20%, rgba(95, 63, 224, 0.15), rgba(7, 11, 31, 0.95) 45%, #050817 88%);
+  --surface-1: rgba(14, 19, 44, 0.75);
+  --surface-2: rgba(18, 24, 56, 0.55);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #e2e8f0;
+  --text-muted: #c7d2fe;
+  --accent: #7c3aed;
+  --accent-2: #22d3ee;
+  --glow: rgba(34, 211, 238, 0.18);
+  --shadow-strong: 0 24px 70px rgba(5, 8, 23, 0.75);
+  --nav-bg: linear-gradient(140deg, rgba(6, 9, 26, 0.92), rgba(14, 19, 44, 0.85));
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-text: #e2e8f0;
+  --nav-glow: rgba(34, 211, 238, 0.28);
 }
 
 *,
@@ -16,21 +45,37 @@
 body {
   margin: 0;
   font-family: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #0f172a;
-  color: #0f172a;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-primary);
 }
 
 p {
-  line-height: 1.6;
-  color: var(--color-muted);
+  line-height: 1.7;
+  color: var(--text-muted);
 }
 
-.eyebrow {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: var(--color-primary);
-  margin-bottom: 0.25rem;
+a {
+  color: inherit;
+}
+
+.view {
+  background: var(--surface-1);
+  border-radius: 32px;
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  box-shadow: var(--shadow-strong);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(18px);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .btn {
@@ -39,27 +84,68 @@ p {
   justify-content: center;
   border-radius: 999px;
   padding: 0.65rem 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .btn.primary {
-  background: var(--color-secondary);
-  color: var(--color-dark);
-  box-shadow: 0 10px 25px rgba(255, 211, 105, 0.5);
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #fff;
+  box-shadow: 0 14px 32px var(--glow);
 }
 
 .btn.secondary {
   background: transparent;
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn.ghost {
+  border-color: var(--surface-border);
+  color: var(--text-primary);
+  background: var(--surface-2);
 }
 
 .btn:hover {
   transform: translateY(-1px);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.glass {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(18px);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px var(--glow);
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+.muted {
+  color: var(--text-muted);
 }

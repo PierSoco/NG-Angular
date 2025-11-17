@@ -1,10 +1,13 @@
 .footer {
-  background: #0f172a;
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
+  color: var(--nav-text);
   text-align: center;
   padding: 2rem 1rem;
   margin-top: 3rem;
   font-size: 0.9rem;
+  border-top: 1px solid var(--nav-border);
+  box-shadow: 0 -8px 24px var(--nav-glow);
+  width: 100%;
 }
 
 .footer a {

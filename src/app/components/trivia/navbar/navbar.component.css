@@ -1,13 +1,13 @@
 .navbar {
-  background: rgba(4, 7, 29, 0.85);
-  backdrop-filter: blur(14px);
-  color: #fff;
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  color: var(--nav-text);
   position: sticky;
   top: 0;
   z-index: 10;
   padding: 0.85rem clamp(1rem, 5vw, 4rem);
-  box-shadow: 0 12px 30px rgba(8, 12, 42, 0.45);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px var(--nav-glow);
+  border-bottom: 1px solid var(--nav-border);
 }
 
 .navbar-container {
@@ -18,12 +18,70 @@
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--nav-text);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+
+.logo-mark {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 18px var(--glow);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--nav-border);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle .orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.02);
+}
+
+.theme-toggle .icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffd369;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 0 0 6px rgba(255, 211, 105, 0.2);
+}
+
+.theme-toggle .icon.moon {
+  background: #22d3ee;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.2), 0 0 0 6px rgba(34, 211, 238, 0.2);
+  transform: translate(-50%, -50%) rotate(8deg);
+}
+
+.theme-toggle:hover .icon {
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 .nav-links {
@@ -39,7 +97,7 @@
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-weight: 600;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.35rem;
   border-bottom: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
@@ -57,7 +115,7 @@
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--nav-border);
   background: transparent;
   align-items: center;
   justify-content: center;
@@ -96,7 +154,7 @@
     left: 0;
     right: 0;
     flex-direction: column;
-    background: rgba(8, 13, 41, 0.95);
+    background: var(--nav-bg);
     padding: 1.25rem clamp(1rem, 5vw, 2rem);
     transform: translateY(-20px);
     opacity: 0;

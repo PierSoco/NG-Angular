@@ -21,32 +21,32 @@ interface Categoria {
   styleUrls: ['./caracteristicas.component.css']
 })
 export class CaracteristicasComponent {
-  titulo = 'Características y ventajas que hacen a Angular ideal para productos modernos';
+  titulo = 'Pilares que hacen a Angular ideal para productos modernos';
 
   listaCaracteristicas: Caracteristica[] = [
     {
       nombre: 'Componentes reutilizables',
-      detalle: 'Cada pieza encapsula lógica, vista y estilos.',
-      beneficio: 'Disminuye deuda técnica y mejora el onboarding.'
+      detalle: 'Cada pieza encapsula logica, vista y estilos con inputs y outputs claros.',
+      beneficio: 'Disminuye deuda tecnica y mejora el onboarding.'
     },
     {
       nombre: 'Data binding reactivo',
-      detalle: 'Sincroniza automáticamente vistas y estados.',
+      detalle: 'Sincroniza automaticamente vistas y estados con Change Detection optimizada.',
       beneficio: 'Reduce errores al manipular el DOM manualmente.'
     },
     {
-      nombre: 'Inyección de dependencias',
-      detalle: 'Servicios compartidos listos para pruebas unitarias.',
-      beneficio: 'Escenarios complejos resultan más testeables.'
+      nombre: 'Inyeccion de dependencias',
+      detalle: 'Servicios compartidos listos para pruebas unitarias y mocking sencillo.',
+      beneficio: 'Escenarios complejos resultan mas testeables.'
     },
     {
       nombre: 'Router avanzado',
-      detalle: 'Lazy loading, guards, resolvers y navegación accesible.',
+      detalle: 'Lazy loading, guards, resolvers y navegacion accesible.',
       beneficio: 'Optimiza la experiencia en aplicaciones SPA.'
     },
     {
       nombre: 'Herramientas oficiales',
-      detalle: 'Angular CLI, analíticas, builders y actualizaciones guiadas.',
+      detalle: 'Angular CLI, analiticas, builders y actualizaciones guiadas.',
       beneficio: 'Entregas constantes sin romper funcionalidades.'
     }
   ];
@@ -59,7 +59,7 @@ export class CaracteristicasComponent {
     },
     {
       titulo: 'UX & UI',
-      descripcion: 'Componentes accesibles, animaciones listas y Material 3.',
+      descripcion: 'Componentes accesibles, animaciones listas y Material 3 adaptable.',
       chips: ['Angular Material', 'CDK', 'Animations']
     },
     {

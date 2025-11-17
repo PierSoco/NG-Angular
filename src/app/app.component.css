@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: radial-gradient(circle at 10% 20%, #0f172a, #111c44 45%, #0f172a 90%);
-  color: #0f172a;
 }
 
 .view-frame {
@@ -23,11 +21,15 @@
 }
 
 .view-frame::before {
-  background: radial-gradient(circle at 25% 20%, rgba(255, 211, 105, 0.25), transparent 50%);
+  background:
+    radial-gradient(circle at 20% 25%, rgba(124, 58, 237, 0.22), transparent 45%),
+    radial-gradient(circle at 80% 35%, rgba(34, 211, 238, 0.16), transparent 40%);
 }
 
 .view-frame::after {
-  background: radial-gradient(circle at 80% 30%, rgba(14, 165, 233, 0.2), transparent 45%);
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.02), rgba(124, 58, 237, 0.06)),
+    linear-gradient(240deg, rgba(34, 211, 238, 0.05), rgba(14, 165, 233, 0.05));
 }
 
 .view-frame > * {

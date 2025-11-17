@@ -1,0 +1,44 @@
+<nav class="navbar" [class.open]="menuOpen">
+  <div class="navbar-container">
+    <a routerLink="/" class="logo" (click)="closeMenu()">
+      <span class="logo-mark"></span>
+      Web Educativa - Angular
+    </a>
+
+    <div class="nav-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        (click)="cambiarTema()"
+        [attr.aria-label]="temaActual === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+      >
+        <span class="orbit"></span>
+        <span class="icon" [class.sun]="temaActual === 'light'" [class.moon]="temaActual === 'dark'"></span>
+      </button>
+
+      <button class="menu-toggle" type="button" (click)="toggleMenu()" aria-label="Abrir menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <ul class="nav-links" [class.open]="menuOpen">
+      <li>
+        <a routerLink="/introduccion" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+          Introduccion
+        </a>
+      </li>
+      <li>
+        <a routerLink="/caracteristicas" routerLinkActive="active-link" (click)="closeMenu()">
+          Caracteristicas
+        </a>
+      </li>
+      <li>
+        <a routerLink="/trivia" routerLinkActive="active-link" (click)="closeMenu()">
+          Trivia
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
